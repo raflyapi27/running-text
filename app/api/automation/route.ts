@@ -4,15 +4,16 @@ import { NextResponse } from "next/server";
 const BACKEND_URL = process.env.BACKEND_URL;
 const API_KEY = process.env.API_KEY;
 
-if (!BACKEND_URL) {
-  throw new Error("BACKEND_URL environment variable is not set");
-}
-
-if (!API_KEY) {
-  throw new Error("API_KEY environment variable is not set");
-}
-
 export async function GET(request: NextRequest) {
+  if (!BACKEND_URL || !API_KEY) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Server configuration error: Missing environment variables",
+      },
+      { status: 500 },
+    );
+  }
   try {
     const authHeader = request.headers.get("authorization");
 
@@ -42,6 +43,15 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  if (!BACKEND_URL || !API_KEY) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Server configuration error: Missing environment variables",
+      },
+      { status: 500 },
+    );
+  }
   try {
     const authHeader = request.headers.get("authorization");
     const body = await request.json();
@@ -73,6 +83,15 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PUT(request: NextRequest) {
+  if (!BACKEND_URL || !API_KEY) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Server configuration error: Missing environment variables",
+      },
+      { status: 500 },
+    );
+  }
   try {
     const authHeader = request.headers.get("authorization");
     const body = await request.json();
