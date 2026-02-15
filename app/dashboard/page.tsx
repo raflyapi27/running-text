@@ -455,7 +455,6 @@ export default function DashboardPage() {
         speed: autoSpeed,
         brightness: autoBrightness,
         animation: autoAnimation,
-        size: autoSize,
         hour: autoHour,
         minute: autoMinute,
         repeat: autoRepeat,
